@@ -79,7 +79,7 @@
 
         function checkAnswer(selectedIndex) {
             const questionData = quizData[currentQuestionIndex];
-            document.getElementById("result").textContent = selectedIndex === questionData.correct ? "うぃー↑" : "うぃー↓";
+            document.getElementById("result").textContent = selectedIndex === questionData.correct ? "うぃー↑" : "うぃー↓　君は真のうぃーを知らないね？";
             document.getElementById("explanation").textContent = questionData.explanation;
             document.querySelector(".next-btn").style.display = "block";
         }
