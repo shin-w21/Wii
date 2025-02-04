@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中学校社会 公民クイズ</title>
+    <link rel="stylesheet" href="./Setting/setting.css">
+</head>
+<body>
+
+    <!-- タイトル画面 -->
+    <div class="container" id="title-screen">
+        <h1>うぃー↑</h1>
+        <button class="btn" onclick="startQuiz()">うぃーを始める</button>
+    </div>
+
+    <!-- クイズ画面（最初は非表示） -->
+    <div class="container hidden" id="quiz-screen">
+        <p class="question" id="question"></p>
+        <div class="choices" id="choices"></div>
+        <p class="result" id="result"></p>
+        <p class="explanation" id="explanation"></p>
+        <button class="next-btn" onclick="nextQuestion()">次の問題へ</button>
+    </div>
+
+    <!-- 終了画面（最初は非表示） -->
+    <div class="container hidden" id="end-screen">
+        <h1>うぃー終了！</h1>
+        <p>お疲れ様でした！</p>
+        <button class="btn" onclick="returnToTitle()">うぃーに戻る</button>
+    </div>
+
+    <script>
+        const allQuizData = [
+            {
+                question: "うぃー？",
+                choices: ["うぃー", "うぃー", "うぃー", "うぃー"],
+                correct: 2,
+                explanation: "うぃーは義務です。"
+            }
+        ];
+
+        let quizData = [];
+        let currentQuestionIndex = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function startQuiz() {
+            document.getElementById("title-screen").classList.add("hidden");
+            document.getElementById("quiz-screen").classList.remove("hidden");
+            document.getElementById("end-screen").classList.add("hidden");
+
+            shuffle(allQuizData);
+            quizData = allQuizData.slice(0, 5); // 5問をランダム選出
+            currentQuestionIndex = 0;
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const questionData = quizData[currentQuestionIndex];
+            document.getElementById("question").textContent = questionData.question;
+            document.getElementById("choices").innerHTML = "";
+            document.getElementById("result").textContent = "";
+            document.getElementById("explanation").textContent = "";
+            document.querySelector(".next-btn").style.display = "none";
+
+            questionData.choices.forEach((choice, index) => {
+                const button = document.createElement("button");
+                button.textContent = choice;
+                button.onclick = () => checkAnswer(index);
+                document.getElementById("choices").appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            const questionData = quizData[currentQuestionIndex];
+            document.getElementById("result").textContent = selectedIndex === questionData.correct ? "うぃー↑" : "うぃー↓";
+            document.getElementById("explanation").textContent = questionData.explanation;
+            document.querySelector(".next-btn").style.display = "block";
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                document.getElementById("quiz-screen").classList.add("hidden");
+                document.getElementById("end-screen").classList.remove("hidden");
+            }
+        }
+
+        function returnToTitle() {
+            document.getElementById("end-screen").classList.add("hidden");
+            document.getElementById("title-screen").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
