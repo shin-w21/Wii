@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>君もふぇーする？</title>
+    <title>君もうぃーする？</title>
     <link rel="stylesheet" href="./Setting/setting.css">
 </head>
 <body>
 
     <!-- タイトル画面 -->
     <div class="container" id="title-screen">
-        <h1>ふぇー↑</h1>
-        <button class="btn" onclick="startQuiz()">ふぇーを始める</button>
+        <h1>うぃー↑</h1>
+        <button class="btn" onclick="startQuiz()">うぃーを始める</button>
     </div>
 
     <!-- クイズ画面（最初は非表示） -->
@@ -25,18 +25,18 @@
 
     <!-- 終了画面（最初は非表示） -->
     <div class="container hidden" id="end-screen">
-        <h1>ふぇー終了！</h1>
+        <h1>うぃー終了！</h1>
         <p>お疲れ様でした！</p>
-        <button class="btn" onclick="returnToTitle()">アキ・チャン</button>
+        <button class="btn" onclick="returnToTitle()">もう一度うぃーする</button>
     </div>
 
     <script>
         const allQuizData = [
             {
-                question: "ふぇー？",
-                choices: ["ふぇー", "ふぇー", "ふぇー", "ふぇー"],
-                correct: 2,
-                explanation: "ふぇーは義務です。"
+                question: "うぃー？",
+                choices: ["うぃー", "うぃー", "うぃー", "うぃー"],
+                correct: 1,
+                explanation: "うぃーは義務です。"
             }
         ];
 
@@ -79,7 +79,7 @@
 
         function checkAnswer(selectedIndex) {
             const questionData = quizData[currentQuestionIndex];
-            document.getElementById("result").textContent = selectedIndex === questionData.correct ? "ふぇー↑" : "ふぇー↓　君は真のうぃーを知らないね？";
+            document.getElementById("result").textContent = selectedIndex === questionData.correct ? "うぃー↑" : "うぃー↓　君は真のうぃーを知らないね？";
             document.getElementById("explanation").textContent = questionData.explanation;
             document.querySelector(".next-btn").style.display = "block";
         }
